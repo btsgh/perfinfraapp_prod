@@ -1,0 +1,137 @@
+{
+  "unpublishedPage": {
+    "name": "PR Details",
+    "slug": "pr-details",
+    "layouts": [
+      {
+        "viewMode": false,
+        "dsl": {
+          "widgetName": "MainContainer",
+          "backgroundColor": "none",
+          "rightColumn": 1224,
+          "snapColumns": 64,
+          "detachFromLayout": true,
+          "widgetId": "0",
+          "topRow": 0,
+          "bottomRow": 2050,
+          "containerStyle": "none",
+          "snapRows": 106,
+          "parentRowSpace": 1,
+          "type": "CANVAS_WIDGET",
+          "canExtend": true,
+          "version": 89,
+          "minHeight": 1070,
+          "parentColumnSpace": 1,
+          "dynamicBindingPathList": [],
+          "leftColumn": 0
+        },
+        "layoutOnLoadActions": [
+          [
+            {
+              "id": "PR Details_InitUtils.init",
+              "name": "InitUtils.init",
+              "collectionId": "PR Details_InitUtils",
+              "confirmBeforeExecute": false,
+              "pluginType": "JS",
+              "jsonPathKeys": [
+                "async () => {\n  await getAllRepos.run();\n  await fetchLast100PRruns.run();\n  await getPRMetaRuns.run();\n}"
+              ],
+              "timeoutInMillisecond": 10000
+            },
+            {
+              "id": "PR Details_getFailureStats",
+              "name": "getFailureStats",
+              "confirmBeforeExecute": false,
+              "pluginType": "DB",
+              "jsonPathKeys": [],
+              "timeoutInMillisecond": 10000
+            },
+            {
+              "id": "PR Details_getMetrics",
+              "name": "getMetrics",
+              "confirmBeforeExecute": false,
+              "pluginType": "DB",
+              "jsonPathKeys": [],
+              "timeoutInMillisecond": 10000
+            }
+          ],
+          [
+            {
+              "id": "PR Details_getRunData",
+              "name": "getRunData",
+              "confirmBeforeExecute": false,
+              "pluginType": "DB",
+              "jsonPathKeys": [
+                "Utils.getMetricsToShow()",
+                "runId.selectedOptionValue.split(\"_\")[0]",
+                "runId.selectedOptionValue.split(\"_\")[1]",
+                "RepoSelect.selectedOptionValue"
+              ],
+              "timeoutInMillisecond": 10000
+            }
+          ],
+          [
+            {
+              "id": "PR Details_getLastReleaseRuns",
+              "name": "getLastReleaseRuns",
+              "confirmBeforeExecute": false,
+              "pluginType": "DB",
+              "jsonPathKeys": [
+                "Utils.getMetricsToShow()",
+                "Utils.getCurrentAction()",
+                "selectMetrics.selectedOptionValues.length * 100"
+              ],
+              "timeoutInMillisecond": 10000
+            },
+            {
+              "id": "PR Details_getPrDetails",
+              "name": "getPrDetails",
+              "confirmBeforeExecute": false,
+              "pluginType": "API",
+              "jsonPathKeys": [
+                "RepoSelect.selectedOptionValue",
+                "prSelect.selectedOptionValue"
+              ],
+              "timeoutInMillisecond": 10000
+            }
+          ],
+          [
+            {
+              "id": "PR Details_getLatestReleaseMean",
+              "name": "getLatestReleaseMean",
+              "confirmBeforeExecute": false,
+              "pluginType": "DB",
+              "jsonPathKeys": [
+                "Utils.getMetricsToShow()",
+                "Utils.getCurrentRunMetaId() ? `and id < ${Utils.getCurrentRunMetaId()} ` : ''"
+              ],
+              "timeoutInMillisecond": 10000
+            },
+            {
+              "id": "PR Details_getShortTermReleaseMean",
+              "name": "getShortTermReleaseMean",
+              "confirmBeforeExecute": false,
+              "pluginType": "DB",
+              "jsonPathKeys": [
+                "Utils.getMetricsToShow()",
+                "Utils.getCurrentRunMetaId() ? `and id < ${Utils.getCurrentRunMetaId()} ` : ''"
+              ],
+              "timeoutInMillisecond": 10000
+            }
+          ]
+        ],
+        "layoutOnLoadActionErrors": [],
+        "validOnPageLoadActions": true,
+        "id": "PR Details",
+        "deleted": false,
+        "policies": [],
+        "userPermissions": []
+      }
+    ],
+    "userPermissions": [],
+    "policies": [],
+    "isHidden": false
+  },
+  "deleted": false,
+  "gitSyncId": "63636afbe0820924e1708dd5_63636afce0820924e1708deb"
+}
