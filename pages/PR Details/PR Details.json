@@ -33,16 +33,6 @@
               "collectionId": "PR Details_InitUtils",
               "confirmBeforeExecute": false,
               "pluginType": "JS",
-              "jsonPathKeys": [
-                "async () => {\n  await getAllRepos.run();\n  await fetchLast100PRruns.run();\n  await getPRMetaRuns.run();\n}"
-              ],
-              "timeoutInMillisecond": 10000
-            },
-            {
-              "id": "PR Details_getFailureStats",
-              "name": "getFailureStats",
-              "confirmBeforeExecute": false,
-              "pluginType": "DB",
               "jsonPathKeys": [],
               "timeoutInMillisecond": 10000
             },
@@ -57,15 +47,24 @@
           ],
           [
             {
-              "id": "PR Details_getRunData",
-              "name": "getRunData",
+              "id": "PR Details_getLatestReleaseMean",
+              "name": "getLatestReleaseMean",
               "confirmBeforeExecute": false,
               "pluginType": "DB",
               "jsonPathKeys": [
                 "Utils.getMetricsToShow()",
-                "runId.selectedOptionValue.split(\"_\")[0]",
-                "runId.selectedOptionValue.split(\"_\")[1]",
-                "RepoSelect.selectedOptionValue"
+                "Utils.getCurrentRunMetaId() ? `and id < ${Utils.getCurrentRunMetaId()} ` : ''"
+              ],
+              "timeoutInMillisecond": 10000
+            },
+            {
+              "id": "PR Details_getShortTermReleaseMean",
+              "name": "getShortTermReleaseMean",
+              "confirmBeforeExecute": false,
+              "pluginType": "DB",
+              "jsonPathKeys": [
+                "Utils.getMetricsToShow()",
+                "Utils.getCurrentRunMetaId() ? `and id < ${Utils.getCurrentRunMetaId()} ` : ''"
               ],
               "timeoutInMillisecond": 10000
             }
@@ -91,30 +90,6 @@
               "jsonPathKeys": [
                 "RepoSelect.selectedOptionValue",
                 "prSelect.selectedOptionValue"
-              ],
-              "timeoutInMillisecond": 10000
-            }
-          ],
-          [
-            {
-              "id": "PR Details_getLatestReleaseMean",
-              "name": "getLatestReleaseMean",
-              "confirmBeforeExecute": false,
-              "pluginType": "DB",
-              "jsonPathKeys": [
-                "Utils.getMetricsToShow()",
-                "Utils.getCurrentRunMetaId() ? `and id < ${Utils.getCurrentRunMetaId()} ` : ''"
-              ],
-              "timeoutInMillisecond": 10000
-            },
-            {
-              "id": "PR Details_getShortTermReleaseMean",
-              "name": "getShortTermReleaseMean",
-              "confirmBeforeExecute": false,
-              "pluginType": "DB",
-              "jsonPathKeys": [
-                "Utils.getMetricsToShow()",
-                "Utils.getCurrentRunMetaId() ? `and id < ${Utils.getCurrentRunMetaId()} ` : ''"
               ],
               "timeoutInMillisecond": 10000
             }

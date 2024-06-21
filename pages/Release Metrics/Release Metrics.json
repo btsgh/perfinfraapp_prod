@@ -33,9 +33,7 @@
               "collectionId": "Release Metrics_Utils",
               "confirmBeforeExecute": false,
               "pluginType": "JS",
-              "jsonPathKeys": [
-                "async () => {\n  await getAllRepos.run();\n  await getMetrics.run();\n  await getLastReleaseRuns.run();\n}"
-              ],
+              "jsonPathKeys": [],
               "timeoutInMillisecond": 10000
             }
           ]
